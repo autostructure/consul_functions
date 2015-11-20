@@ -24,13 +24,13 @@ EOS
       tag_query = tag ? "?tag=#{tag}" : ''
       uri = URI("http://#{consul_host}:#{consul_port}/v1/catalog/service/#{name}#{tag_query}")
       res = Net::HTTP.get_response(uri)
-      if res.code == '200'
-        results = JSON.parse(res.body)
-        ret_hash = {}
-        results.each do |node|
-          ret_hash[node['Node']] = node['Address']
-        end
-        ret_hash
+#      if res.code == '200'
+#        results = JSON.parse(res.body)
+#        ret_hash = {}
+#        results.each do |node|
+#          ret_hash[node['Node']] = node['Address']
+#        end
+        res
       else
         raise(Puppet::Error, "Uri: #{uri.to_s}, returned code #{res.code}")
       end
